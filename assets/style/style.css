@@ -1,0 +1,72 @@
+:root {
+    --lightblk: #1e2124;
+    --blk: #111417;
+    --blue: 0, 255, 238;
+    --red: 255, 8, 0;
+    --white: #fff;
+    --headtxt: #c4f2eb;
+    --green: #2ecc71;
+    --grey: rgba(155, 155, 155, 0.71);
+    --app-content-secondary-color: #1d283c;
+    --lightred: ff646d;
+    --filter-shadow: rgba(16, 24, 39, 0.8) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+body {
+    background-color: var(--lightblk);
+    font-family: 'Futura PT Demi', sans-serif;
+    color: var(--white);
+}
+a {
+    text-decoration: none;
+}
+
+.container {
+    color: var(--lightred);
+    box-shadow: 0 10px 15px rgba(0,0,0,.6);
+    transform: translate(-50%);
+    border-radius: 6px;
+    width: 85%;
+    height: 80%;
+    position: fixed;
+    background-color: rgba(68, 73, 80, 0.29);
+    left: 50%;
+    margin-top: 2em;
+}
+
+
+.center {
+    font-size: 25px;
+    text-align: center;
+}
+
+.assignments {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    color: var(--white);
+    background-color: var(--blk);
+    padding: 2em;
+    gap: 20px;
+}
+
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    color: var(--white);
+    background-color: var(--blk);
+}
+
+.post {
+    background-color: var(--lightblk);
+    padding: 1em;
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+
+

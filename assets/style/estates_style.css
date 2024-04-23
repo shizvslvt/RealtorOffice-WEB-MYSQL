@@ -1,0 +1,26 @@
+.estate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    grid-gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+.estate-item {
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+}
+.estate-item:hover {
+    transform: scale(1.0035);
+    box-shadow: 0px 0px 12px var(--grey);
+    border-radius: 8px;
+    color: var(--white);
+}
+.estate-id {
+    color: red;
+}

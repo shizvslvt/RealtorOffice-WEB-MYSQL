@@ -1,0 +1,45 @@
+
+.estate-block {
+    margin: 15px;
+    width: 350px;
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+
+    /* Добавленные стили */
+    overflow: auto; /* или overflow: scroll; для появления полос прокрутки */
+    word-wrap: break-word; /* Для разрыва слов при необходимости */
+}
+
+.estate-attributes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.estate-row {
+    display: flex;
+    justify-content: space-between;
+}
+.estate-title {
+    color: var(--white);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.status {
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    width: max-content;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.status.active { color: #2ba972; background-color: rgba(43, 169, 114, 0.2);}
+.status.archived { color: #586f9a; background-color: rgba(89, 113, 157, 0.2);}
+
+
