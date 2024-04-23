@@ -42,7 +42,39 @@ class Estate
             $theme->assign('statusClass', $statusClass);
             $theme->assign('statusText', $statusText);
         }
-        $result->close();
+        $theme->display('estate.tpl');
+    }
+
+    public static function getAllActiviesEstates() {
+        global $db;
+
+        $sql = "SELECT * FROM ro_estates WHERE archived = 0 ORDER BY created DESC";
+        $result = $db->query($sql);
+
+        $list = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $entry = array(
+                    'id' => $row["id"],
+                    'seller_id' => $row["seller_id"],
+                    'title' => $row["title"],
+                    'cost' => $row["cost"],
+                    'type' => $row["type"],
+                    'locality' => $row["locality"],
+                    'city' => $row["city"],
+                    'area' => $row["area"],
+                    'bedrooms' => $row["bedrooms"],
+                    'floors' => $row["floors"],
+                    'created' => $row["created"],
+                    'viewed' => $row["viewed"],
+                    'deal' => $row["deal"],
+                    'archived' => $row["archived"]
+                );
+                $list[] = $entry;
+            }
+        }
+
+        return $list;
     }
 
 }

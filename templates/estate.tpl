@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="../assets/style/estate_style.css">
 {if isset($estate)}
-    <div class="estate-block">
+        <div class="estate-item">
         <div class="estate-title">{$estate['title']}</div>
-        <div class="estate-attributes">
+            <div class="estate-attributes">
             <div class="estate-row">
                 <div class="estate-attribute">ID:</div><div class="estate-value">{$estate['id']}</div></div>
             <div class="estate-row">
@@ -27,6 +27,6 @@
                 <div class="estate-attribute">Deal:</div><div class="estate-value">{$estate['deal']}</div></div>
             <div class="estate-row">
                 <div class="estate-attribute">Status:</div><div class="estate-archived status {$statusClass}">{$statusText}</div></div>
+            </div>
         </div>
-    </div>
 {/if}

@@ -1,20 +1,18 @@
 <?php
-global $theme;
+global $theme, $user, $db, $estate;
 
+echo '<div class="estate-grid">';
 if (isset($_COOKIE['uid'])) {
     $uid = $_COOKIE['uid'];
+    $theme->assign('name', $user->getUsername($uid));
 
-    global $db;
-    $sql = "SELECT name FROM ro_users WHERE id = '$uid'";
-    $result = $db->query($sql);
-    if ($result) {
-        if ($result->num_rows > 0) {
-            $res = $result->fetch_assoc()['name'];
-            $theme->assign('name', $res);
-        }
-        $db->close();
+    $query = "SELECT id FROM ro_estates WHERE seller_id = $uid";
+    $result = $db->query($query);
+
+    while ($row = $result->fetch_assoc()) {
+     $estate->SelectedByID($row['id']);
     }
 }
-
+echo '</div>';
 $theme->display('profile.tpl');
-?>
+

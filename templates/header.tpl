@@ -5,7 +5,9 @@
 <div class="header">
     <div class="header-left">
         <a href="?p=home"><div class="header-item">Home</div></a>
-        <a href="?p=page1"><div class="header-item">Link 1</div></a>
+        {if $uid == 1}
+        <a href="?p=control-panel"><div class="header-item">Control Panel</div></a>
+        {/if}
     </div>
 
     <div class="header-middle">

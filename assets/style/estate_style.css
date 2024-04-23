@@ -1,18 +1,68 @@
 
-.estate-block {
-    margin: 15px;
-    width: 350px;
+.estate-grid {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+    overflow: auto;
+    max-height: 92%;
+}
+
+/* Базовые стили */
+.estate-item {
+    width: 24%; /* Исходная ширина для каждого элемента */
     padding: 10px;
     color: var(--grey);
     background-color: var(--blk);
     border-radius: 8px;
     cursor: inherit;
     transition: all 0.4s ease;
-
-    /* Добавленные стили */
-    overflow: auto; /* или overflow: scroll; для появления полос прокрутки */
-    word-wrap: break-word; /* Для разрыва слов при необходимости */
+    box-sizing: border-box;
 }
+@media screen and (max-width: 1670px) {
+    .estate-item {
+        width: 32%; /* Изменяем ширину при ширине экрана до 1200px */
+    }
+}
+
+/* Медиа-запросы для изменения ширины элементов в зависимости от размера экрана */
+@media screen and (max-width: 1200px) {
+    .estate-item {
+        width: 40%; /* Изменяем ширину при ширине экрана до 1200px */
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .estate-item {
+        width: 47%; /* Изменяем ширину при ширине экрана до 800px */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .estate-item {
+        width: 100%; /* Полная ширина элемента при ширине экрана до 600px */
+    }
+}
+
+
+.estate-grid::-webkit-scrollbar {
+    width: 10px; /* Ширина полосы прокрутки */
+}
+
+.estate-grid::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--blk); /* Цвет фона трека */
+}
+
+.estate-grid::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b50; /* Цвет полосы прокрутки */
+    border-radius: 6px; /* Закругление углов полосы прокрутки */
+}
+
+
+
+
 
 .estate-attributes {
     display: flex;
@@ -40,6 +90,6 @@
 }
 
 .status.active { color: #2ba972; background-color: rgba(43, 169, 114, 0.2);}
-.status.archived { color: #586f9a; background-color: rgba(89, 113, 157, 0.2);}
+.status.archived { color: #59719d; background-color: rgba(89, 113, 157, 0.2);}
 
 

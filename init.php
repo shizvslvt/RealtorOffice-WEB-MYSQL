@@ -28,11 +28,13 @@ require_once INCLUDES_PATH . '/classes/App.php';
 require_once INCLUDES_PATH . '/classes/Auth.php';
 require_once INCLUDES_PATH . '/classes/Notify.php';
 require_once INCLUDES_PATH . '/classes/Estate.php';
+require_once INCLUDES_PATH . '/classes/User.php';
 
 $theme =App::templater();
 $auth = new Auth();
 $notify = new Notify();
 $estate = new Estate();
+$user = new User();
 
 
 

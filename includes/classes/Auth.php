@@ -2,11 +2,12 @@
 
 class Auth
 {
+    private static $md5status = false;
+
 
     public static function login($mail, $password) {
         global $db, $notify;
-
-//      $password = md5($password);
+        if(self::$md5status) $password = md5($password);
         $sql = "SELECT id, mail, password FROM ro_users WHERE mail = '$mail' AND password = '$password'";
         $result = $db->query($sql);
         if($result) {
@@ -36,27 +37,69 @@ class Auth
     }
 
 
-    public function register($mail, $password, $repeatpass) {
+    public function register($name, $mail, $password, $repeatpass, $birthday, $PID, $created) {
         global $db, $notify;
 
-        if(empty($mail) || empty($password) || empty($repeatpass)){
+        if (empty($name) || empty($mail) || empty($password) || empty($repeatpass) || empty($birthday) || empty($PID) || empty($created)) {
             $notify->setMessage("All fields are required");
         } else {
             if ($password != $repeatpass) {
                 $notify->setMessage("Passwords do not match");
             } else {
-                //$password = md5($password);
-                $sql = "INSERT INTO ro_users (password, mail) VALUES ('$password', '$mail')";
-                if($db->query($sql) === TRUE) {
-                    $db->close();
-                    $notify->setMessage("Registration successful");
-                    header('Location: ?p=login');
+                $sql_check = "SELECT * FROM ro_users WHERE mail = '$mail' OR PID = '$PID'";
+                $result = $db->query($sql_check);
+                if ($result->num_rows > 0) {
+                    $notify->setMessage("Mail or PID already exists");
                 } else {
-                    $notify->setMessage("Error: " . $sql . "<br>" . $db->error);
+                    if(self::$md5status) $password = md5($password);
+                    $sql = "INSERT INTO ro_users (name, mail, password, birthday, PID, created) VALUES ('$name', '$mail', '$password', '$birthday', '$PID', '$created')";
+                    if ($db->query($sql) === TRUE) {
+                        $notify->setMessage("Registration successful");
+                        header('Location: ?p=login');
+                        exit();
+                    } else {
+                        $notify->setMessage("Error: " . $sql . "<br>" . $db->error);
+                    }
                 }
             }
         }
         $db->close();
     }
 
+
+
+    public function register_realtor($name, $mail, $password, $repeatpass, $birthday, $PID, $created, $exp) {
+        global $db, $notify;
+
+        if(empty($name) || empty($mail) || empty($password) || empty($repeatpass) || empty($birthday) || empty($PID) || empty($created) || empty($exp)){
+            $notify->setMessage("All fields are required");
+        } else {
+            if ($password != $repeatpass) {
+                $notify->setMessage("Passwords do not match");
+            } else {
+                $sql_check = "SELECT * FROM ro_users WHERE mail = '$mail' OR PID = '$PID'";
+                $result = $db->query($sql_check);
+                if ($result->num_rows > 0) {
+                    $notify->setMessage("Mail or PID already exists");
+                } else {
+                    if(self::$md5status) $password = md5($password);
+                    $sql = "INSERT INTO ro_users (name, mail, password, birthday, PID, created) VALUES ('$name', '$mail', '$password', '$birthday', '$PID', '$created')";
+                    if ($db->query($sql) === TRUE) {
+                        $user_id = $db->insert_id;
+                        $sql_realtor = "INSERT INTO ro_realtors (user_id, percent, experience) VALUES ('$user_id', 10, '$exp')";
+                        if ($db->query($sql_realtor) === TRUE) {
+                            $notify->setMessage("Registration as realtor successful");
+                            header('Location: ?p=login');
+                            exit();
+                        } else {
+                            $notify->setMessage("Error adding realtor: " . $sql_realtor . "<br>" . $db->error);
+                        }
+                    } else {
+                        $notify->setMessage("Error: " . $sql . "<br>" . $db->error);
+                    }
+                }
+            }
+        }
+        $db->close();
+    }
 }

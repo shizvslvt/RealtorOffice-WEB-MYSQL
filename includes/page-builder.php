@@ -6,22 +6,44 @@ include_once PAGES_PATH . '/header.php';
 
 echo '<div class="container">';
 $page = $_GET['p'] ?? 'home';
+$uid = $_COOKIE['uid'] ?? '';
 
 switch ($page) {
     case 'home':
         $page = PAGES_PATH . "/home.php";
         break;
-    case 'page1':
-        $page = PAGES_PATH . "/page1.php";
+    case 'control-panel':
+        if (!empty($uid) && ($uid == 1)) {
+            $page = PAGES_PATH . "/control-panel.php";
+        } else {
+            $notify->setMessage("You are not allowed.");
+            $page = PAGES_PATH . "/home.php";
+        }
         break;
+
     case 'login':
-        $page = PAGES_PATH . "/login.php";
+        if (!empty($uid)) {
+            $notify->setMessage("You are already logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/login.php";
         break;
     case 'register':
-        $page = PAGES_PATH . "/register.php";
+        if (!empty($uid)) {
+            $notify->setMessage("You are already registered and logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/register.php";
+        break;
+    case 'register-realtor':
+        if (!empty($uid)) {
+            $notify->setMessage("You are already registered and logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/register-realtor.php";
         break;
     case 'logout':
-        $page = PAGES_PATH . "/logout.php";
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/logout.php";
         break;
     case 'profile':
         $page = PAGES_PATH . "/profile.php";
@@ -30,12 +52,16 @@ switch ($page) {
         $page = PAGES_PATH . "/estate.php";
         break;
     case 'add-estate':
-        $page = PAGES_PATH . "/add-estate.php";
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/add-estate.php";
         break;
     default:
         $notify->setMessage("Page not found");
         break;
 }
+
 
 if(!empty($page)) {
     include_once $page;

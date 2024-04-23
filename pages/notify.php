@@ -7,6 +7,6 @@ if(isset($message)) {
     $theme->assign('message', $message);
     $notify->clear();
 } else {
-    $theme->assign('message', ''); // Присваиваем пустую строку, если $message не определена
+    $theme->assign('message', '');
 }
 $theme->display('notify.tpl');

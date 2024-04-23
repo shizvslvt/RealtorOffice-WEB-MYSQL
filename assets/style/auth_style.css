@@ -5,7 +5,7 @@
     top: 50%;
     left: 50%;
     width: 400px;
-    padding: 40px;
+    padding: 15px;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.5);
     box-sizing: border-box;
@@ -22,6 +22,16 @@
 
 .auth .user-box {
     position: relative;
+}
+.user-box-active {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #fff;
+    color: var(--grey);
+    top: -20px;
+    left: 0;
 }
 
 .auth .user-box input {
@@ -59,8 +69,8 @@
     font-size: 21px;
     position: relative;
     display: block;
-    margin: 25px auto;
-    padding: 8px 18px;
+    margin: 10px auto;
+    padding: 8px 12px;
     overflow: hidden;
     border-width: 0;
     outline: none;
