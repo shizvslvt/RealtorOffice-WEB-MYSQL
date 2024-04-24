@@ -6,9 +6,6 @@
 //  Directories
 // ---------------------------------------------------
 
-
-
-
 define('ROOT', dirname(__FILE__) . "/");
 define('INCLUDES_PATH', ROOT . '/includes');
 define('USER_DATA', ROOT . "/data");
@@ -20,7 +17,7 @@ require_once USER_DATA . '/db.php';
 
 
 // ---------------------------------------------------
-// Setup our templater
+// Setup our classes
 // ---------------------------------------------------
 global $theme, $auth, $notify;
 

@@ -5,15 +5,13 @@
 <div class="header">
     <div class="header-left">
         <a href="?p=home"><div class="header-item">Home</div></a>
-        {if $uid == 1}
-        <a href="?p=control-panel"><div class="header-item">Control Panel</div></a>
-        {/if}
+        {if $uid == 1} <a href="?p=control-panel"><div class="header-item">Control Panel</div></a> {/if}
+        {if $uid} <a href="?p=history-view"><div class="header-item">History View</div></a> {/if}
+        {if $uid} <a href="?p=chat"><div class="header-item">Chat</div></a> {/if}
     </div>
 
     <div class="header-middle">
-        {if $uid}
-            <a href="?p=add-estate"><div class="header-item red"><h1>+</h1></div></a>
-        {/if}
+        {if $uid} <a href="?p=add-estate"><div class="header-item green"><h1>+</h1></div></a> {/if}
     </div>
 
     <div class="header-right">

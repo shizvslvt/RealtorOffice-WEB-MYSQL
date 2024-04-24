@@ -20,6 +20,21 @@ switch ($page) {
             $page = PAGES_PATH . "/home.php";
         }
         break;
+    case 'edit-realtor':
+        if (!empty($uid) && ($uid == 1)) {
+            $page = PAGES_PATH . "/edit-realtor.php";
+        } else {
+            $notify->setMessage("You are not allowed.");
+            $page = PAGES_PATH . "/home.php";
+        }
+        break;
+
+    case 'chat':
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/chat.php";
+        break;
 
     case 'login':
         if (!empty($uid)) {
@@ -56,6 +71,18 @@ switch ($page) {
             $notify->setMessage("You are not logged in.");
             $page = PAGES_PATH . "/home.php";
         } else $page = PAGES_PATH . "/add-estate.php";
+        break;
+    case 'edit-estate':
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/edit-estate.php";
+        break;
+    case 'history-view':
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/history-view.php";
         break;
     default:
         $notify->setMessage("Page not found");

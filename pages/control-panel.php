@@ -1,9 +1,15 @@
 <?php
-global $theme;
 
-$theme->assign('name', 'Joe Goldberg');
+global$db, $theme, $user;
 
+
+$user->selectRealtor();
 $theme->display('control-panel.tpl');
+
+
+
+
+
 
 
 

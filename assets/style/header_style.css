@@ -33,6 +33,9 @@
 .header-item.red:hover{
     color: var(--lightred);
 }
+.header-item.green:hover{
+    color: var(--green);
+}
 
 
 
