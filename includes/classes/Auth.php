@@ -83,6 +83,8 @@ class Auth
                     $notify->setMessage("Mail or PID already exists");
                 } else {
                     if(self::$md5status) $password = md5($password);
+
+                    //TODO add transaction
                     $sql = "INSERT INTO ro_users (name, mail, password, birthday, PID, created) VALUES ('$name', '$mail', '$password', '$birthday', '$PID', '$created')";
                     if ($db->query($sql) === TRUE) {
                         $user_id = $db->insert_id;

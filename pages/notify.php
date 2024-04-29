@@ -2,8 +2,9 @@
 
 global $notify, $theme;
 
-$message = $notify->getMessage();
-if(isset($message)) {
+
+if($notify->getMessage() !== null) {
+    $message = $notify->getMessage();
     $theme->assign('message', $message);
     $notify->clear();
 } else {

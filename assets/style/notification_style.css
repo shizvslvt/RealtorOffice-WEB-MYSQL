@@ -4,7 +4,7 @@
     position: fixed;
     bottom: 10px;
     left: 10px;
-    z-index: 9999; /* Выше всех остальных элементов */
+    z-index: 9999;
     animation: fadeIn 3s forwards, fadeOut 2s 3s forwards;
 
     min-width: 100px;
@@ -12,15 +12,15 @@
     background: rgba(0,0,0,.5);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;/* Запускаем анимации для появления и исчезновения */
+    border-radius: 10px;
 }
 
 .notification:not(:empty) {
-    display: block; /* Показываем .notification только если он не пуст */
+    display: block;
 }
 
 
 @keyframes fadeOut {
-    from { opacity: 1; } /* Начальная прозрачность */
-    to { opacity: 0; } /* Прозрачность к концу анимации */
+    from { opacity: 1; }
+    to { opacity: 0; }
 }

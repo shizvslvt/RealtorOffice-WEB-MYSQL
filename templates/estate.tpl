@@ -55,13 +55,15 @@
         <div class="estate-row">
             <div class="estate-archived status {$statusClass}">{$statusText}</div>
             <div class="estate-value">
-                {if $uid == $estate['seller_id']}
-                    <a href="?p=edit-estate&id={$estate['id']}">Edit</a>
-                {else}
-                    {if isset($chat) && $chat['estate_id']==$estate['id']}
-                        <a href="?p=chat&id={$chat['id']}">Message</a>
+                {if $uid}
+                    {if $uid == $estate['seller_id']}
+                        <a href="?p=edit-estate&id={$estate['id']}">Edit</a>
                     {else}
-                        <a href="?p=add-chat&estate_id={$estate['id']}">Create Chat</a>
+                        {if isset($chat) && $chat['estate_id']==$estate['id']}
+                            <a href="?p=chats&id={$chat['id']}">Message</a>
+                        {else}
+                            <a href="?p=add-chat&estate_id={$estate['id']}&buyer_id={$uid}">Create Chat</a>
+                        {/if}
                     {/if}
                 {/if}
             </div>

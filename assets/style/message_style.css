@@ -1,0 +1,134 @@
+.chat-main {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--blk);
+    margin: 10px;
+    padding: 0 10px;
+    border-radius: 8px;
+}
+
+.buy-link {
+    font-size: 20px;
+    color: var(--grey);
+    padding: 1em;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    float: left;
+}
+.buy-link:hover {
+    color: var(--green);
+}
+
+.messages {
+    margin: 0 10px 0 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.35);
+    overflow-y: auto;
+    height: 100%;
+}
+
+.message {
+    color: var(--white);
+    margin: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    max-width: 400px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message.right {
+    float: right;
+    clear: both;
+    background-color: var(--lightgrey);
+}
+
+.message.left {
+    float: left;
+    clear: both;
+    background-color: var(--blk);
+}
+
+.message-item.date {
+    padding-top: 5px;
+    font-size: 10px;
+    color: var(--grey);
+}
+
+.message-item.text {
+    padding-top: 5px;
+}
+.message-item.id {
+    font-size: 10px;
+    color: var(--grey);
+}
+
+.chat-footer {
+    background-color: var(--blk);
+    margin: 10px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 8px;
+    height: 30px;
+}
+
+.messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--blk);
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b50;
+    border-radius: 6px;
+}
+
+
+.dark-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.dark-input {
+    flex: 1;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.dark-button {
+    background-color: rgba(0, 123, 255, 0.5);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.4s ease-in-out;
+}
+.dark-button:hover {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+

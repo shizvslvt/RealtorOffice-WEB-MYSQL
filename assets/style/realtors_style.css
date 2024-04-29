@@ -1,0 +1,44 @@
+.realtor-item {
+    margin: 20px;
+    width: 24%;
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+    box-sizing: border-box;
+}
+.realtor-item table{
+    margin: 0 auto;
+}
+.realtor-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+table {
+    border-radius: 8px;
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.11);
+}
+td {
+    color: var(--grey);
+    cursor: pointer;
+}
+td a{
+    transition: 0.3s ease-in-out;
+}
+td a:hover {
+    color: var(--white);
+}

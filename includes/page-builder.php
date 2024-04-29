@@ -29,11 +29,25 @@ switch ($page) {
         }
         break;
 
-    case 'chat':
+    case 'add-chat':
         if (empty($uid)) {
             $notify->setMessage("You are not logged in.");
             $page = PAGES_PATH . "/home.php";
-        } else $page = PAGES_PATH . "/chat.php";
+        } else $page = PAGES_PATH . "/add-chat.php";
+        break;
+
+    case 'chats':
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/chats.php";
+        break;
+
+    case 'send-message':
+        if (empty($uid)) {
+            $notify->setMessage("You are not logged in.");
+            $page = PAGES_PATH . "/home.php";
+        } else $page = PAGES_PATH . "/send-message.php";
         break;
 
     case 'login':

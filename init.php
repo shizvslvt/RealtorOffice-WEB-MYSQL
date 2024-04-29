@@ -17,6 +17,13 @@ require_once USER_DATA . '/db.php';
 
 
 // ---------------------------------------------------
+//  Error
+// ---------------------------------------------------
+require_once INCLUDES_PATH . '/error_handler.php';
+
+
+
+// ---------------------------------------------------
 // Setup our classes
 // ---------------------------------------------------
 global $theme, $auth, $notify;
@@ -26,12 +33,12 @@ require_once INCLUDES_PATH . '/classes/Auth.php';
 require_once INCLUDES_PATH . '/classes/Notify.php';
 require_once INCLUDES_PATH . '/classes/Estate.php';
 require_once INCLUDES_PATH . '/classes/User.php';
+require_once INCLUDES_PATH . '/classes/Chat.php';
 
 $theme =App::templater();
 $auth = new Auth();
 $notify = new Notify();
 $estate = new Estate();
 $user = new User();
-
-
+$chat = new Chat();
 

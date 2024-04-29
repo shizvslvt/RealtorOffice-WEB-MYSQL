@@ -1,0 +1,60 @@
+.chats-and-messages {
+    display: flex;
+    color: var(--lightred);
+    height: 100%;
+    width: 100%;
+}
+
+.chats {
+    flex: 0 0 auto;
+    height: 94.5%;
+    width: 270px;
+    margin: 10px 0 0 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    color: var(--white);
+    background-color: var(--blk);
+}
+
+.chats-items {
+    overflow-y: auto;
+    height: 90%;
+    flex-direction: column;
+}
+
+.chats-item {
+    margin: 10px 0;
+    background-color: var(--lightblk);
+    border-radius: 8px;
+    padding: 8px;
+    width: 90%;
+    transition: all 0.5s ease;
+}
+.chats-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+.chats-item-text {
+}
+
+
+
+.chats a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.chats-items::-webkit-scrollbar {width: 8px;}
+
+.chats-items::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--blk);
+}
+
+.chats-items::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b50;
+    border-radius: 6px;
+}
+
+
+

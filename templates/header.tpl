@@ -7,7 +7,7 @@
         <a href="?p=home"><div class="header-item">Home</div></a>
         {if $uid == 1} <a href="?p=control-panel"><div class="header-item">Control Panel</div></a> {/if}
         {if $uid} <a href="?p=history-view"><div class="header-item">History View</div></a> {/if}
-        {if $uid} <a href="?p=chat"><div class="header-item">Chat</div></a> {/if}
+        {if $uid} <a href="?p=chats"><div class="header-item">Chats</div></a> {/if}
     </div>
 
     <div class="header-middle">
@@ -21,7 +21,7 @@
         {/if}
         {if $uid}
             <a href="?p=logout"><div class="header-item red">Logout</div></a>
-            <a href="?p=profile"><div class="header-item">Profile</div></a>
+            <a href="?p=profile"><div class="header-item">Profile {$uid}</div></a>
         {/if}
     </div>
 </div>

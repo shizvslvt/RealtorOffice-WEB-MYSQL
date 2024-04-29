@@ -28,7 +28,7 @@
     float: left;
 }
 .header-item:hover {
-    color: var(--white);
+    color: var(--headtxt);
 }
 .header-item.red:hover{
     color: var(--lightred);
@@ -36,8 +36,3 @@
 .header-item.green:hover{
     color: var(--green);
 }
-
-
-
-
-

@@ -26,7 +26,7 @@ class Estate
     }
 
     function SelectedByID($id) {
-        global $db, $theme, $notify;
+        global $db, $theme;
 
         $sql = "SELECT estate.*, types.name AS type_name, localities.name AS locality_name, cities.name AS city_name
             FROM ro_estates estate
