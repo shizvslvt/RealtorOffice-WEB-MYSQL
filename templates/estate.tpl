@@ -45,15 +45,18 @@
                 <div class="estate-value">{$estate['views']}</div>
             </div>
             <div class="estate-row">
-                <div class="estate-attribute">Deal:</div>
-                <div class="estate-value">{$estate['deal']}</div>
+                <div class="estate-attribute">Cost:</div>
+                <div class="estate-value">{$estate['cost']}</div>
             </div>
 
         </div>
     </a>
     <div class="estate-edit">
         <div class="estate-row">
-            <div class="estate-archived status {$statusClass}">{$statusText}</div>
+            <div class="estate-status {$statusArchivedClass}">{$statusArchivedText}</div>
+            {if $statusDealClass}
+            <div class="estate-status {$statusDealClass}">{$statusDealText}</div>
+            {/if}
             <div class="estate-value">
                 {if $uid}
                     {if $uid == $estate['seller_id']}

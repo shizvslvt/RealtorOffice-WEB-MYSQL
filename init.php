@@ -34,6 +34,7 @@ require_once INCLUDES_PATH . '/classes/Notify.php';
 require_once INCLUDES_PATH . '/classes/Estate.php';
 require_once INCLUDES_PATH . '/classes/User.php';
 require_once INCLUDES_PATH . '/classes/Chat.php';
+require_once INCLUDES_PATH . '/classes/Logs.php';
 
 $theme =App::templater();
 $auth = new Auth();
@@ -41,4 +42,11 @@ $notify = new Notify();
 $estate = new Estate();
 $user = new User();
 $chat = new Chat();
+$log = new Logs();
 
+
+//
+// Other
+//
+
+$GLOBALS["admin_id"] = 8;

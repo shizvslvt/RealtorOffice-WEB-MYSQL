@@ -5,13 +5,14 @@ class Auth
     private static $md5status = false;
 
 
-    public static function login($mail, $password) {
+    public static function login($mail, $password)
+    {
         global $db, $notify;
-        if(self::$md5status) $password = md5($password);
+        if (self::$md5status) $password = md5($password);
         $sql = "SELECT id, mail, password FROM ro_users WHERE mail = '$mail' AND password = '$password'";
         $result = $db->query($sql);
-        if($result) {
-            if($result->num_rows > 0) {
+        if ($result) {
+            if ($result->num_rows > 0) {
                 $res = $result->fetch_assoc()['id'];
                 setcookie("uid", $res, time() + 3600);
                 $db->close();
@@ -22,22 +23,24 @@ class Auth
                 $notify->setMessage("Incorrect email or password");
             }
         } else {
-            $notify->setMessage("Error executing the query");
+            $notify->setMessage("Error executing the query (login)");
         }
         $db->close();
     }
 
-    public static function logout() {
+    public static function logout()
+    {
         global $notify;
         setcookie("uid", null, time() - 3600);
-            $notify->setMessage("You have logged out");
-            header('Location: ?p=home');
-            exit();
+        $notify->setMessage("You have logged out");
+        header('Location: ?p=home');
+        exit();
 
     }
 
 
-    public function register($name, $mail, $password, $repeatpass, $birthday, $PID, $created) {
+    public function register($name, $mail, $password, $repeatpass, $birthday, $PID, $created)
+    {
         global $db, $notify;
 
         if (empty($name) || empty($mail) || empty($password) || empty($repeatpass) || empty($birthday) || empty($PID) || empty($created)) {
@@ -51,7 +54,7 @@ class Auth
                 if ($result->num_rows > 0) {
                     $notify->setMessage("Mail or PID already exists");
                 } else {
-                    if(self::$md5status) $password = md5($password);
+                    if (self::$md5status) $password = md5($password);
                     $sql = "INSERT INTO ro_users (name, mail, password, birthday, PID, created) VALUES ('$name', '$mail', '$password', '$birthday', '$PID', '$created')";
                     if ($db->query($sql) === TRUE) {
                         $notify->setMessage("Registration successful");
@@ -67,11 +70,11 @@ class Auth
     }
 
 
-
-    public function register_realtor($name, $mail, $password, $repeatpass, $birthday, $PID, $created, $exp) {
+    public function register_realtor($name, $mail, $password, $repeatpass, $birthday, $PID, $created, $exp)
+    {
         global $db, $notify;
 
-        if(empty($name) || empty($mail) || empty($password) || empty($repeatpass) || empty($birthday) || empty($PID) || empty($created) || empty($exp)){
+        if (empty($name) || empty($mail) || empty($password) || empty($repeatpass) || empty($birthday) || empty($PID) || empty($created) || empty($exp)) {
             $notify->setMessage("All fields are required");
         } else {
             if ($password != $repeatpass) {
@@ -82,7 +85,7 @@ class Auth
                 if ($result->num_rows > 0) {
                     $notify->setMessage("Mail or PID already exists");
                 } else {
-                    if(self::$md5status) $password = md5($password);
+                    if (self::$md5status) $password = md5($password);
 
                     //TODO add transaction
                     $sql = "INSERT INTO ro_users (name, mail, password, birthday, PID, created) VALUES ('$name', '$mail', '$password', '$birthday', '$PID', '$created')";
@@ -104,4 +107,8 @@ class Auth
         }
         $db->close();
     }
+
+
+
+
 }

@@ -18,7 +18,7 @@ class Chat
             if ($db->query($insert_sql) === TRUE) {
                 $notify->setMessage("Chat create successful");
                 $chat_id = $db->insert_id;
-                header('Location: ?p=chats&id='.$chat_id);
+                header('Location: ?p=chats&id=' . $chat_id);
                 exit();
             } else {
                 $notify->setMessage("Error: " . $insert_sql . "<br>" . $db->error);
@@ -26,4 +26,39 @@ class Chat
         }
     }
 
+    public function getCostEstateByChatId($chat_id)
+    {
+        global $estate,$user;
+        $estate_id = self::getEstateIdByChatId($chat_id);
+        $realtor_id = self::getRealtorIdByChatId($chat_id);
+
+        $realtor_percent = $user->getRealtorPercentByRealtorId($realtor_id);
+
+        $estate_cost = $estate->getCostByEstateId($estate_id);
+        return $estate_cost * (1 + $realtor_percent / 100);
+    }
+
+    public function getEstateIdByChatId($chat_id)
+    {
+        global $db, $notify;
+        $sql = "SELECT estate_id FROM ro_chats WHERE id = $chat_id";
+        $result = $db->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['estate_id'];
+        } else $notify->setMessage('Error: No chat found');
+        return null;
+    }
+
+    public function getRealtorIdByChatId($chat_id)
+    {
+        global $db, $notify;
+        $sql = "SELECT realtor_id FROM ro_chats WHERE id = $chat_id";
+        $result = $db->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['realtor_id'];
+        } else $notify->setMessage('Error: No chat found');
+        return null;
+    }
 }

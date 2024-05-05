@@ -1,0 +1,45 @@
+.buy-estate-item {
+    width: 40%;
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+}
+
+
+h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: var(--white);
+    text-align: center;
+}
+
+
+
+button {
+    display: block;
+    margin: 0 auto;
+    font-size: 21px;
+    padding: 8px 12px;
+    overflow: hidden;
+    border-width: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: var(--green);
+    color: var(--white);
+    transition: 0.35s ease-out;
+}
+
+
+button:hover, button:focus {
+    background-color: #2ecc7190;
+    transform: scale(0.95);
+    box-shadow: var(--filter-shadow);
+}
+
+
+
+
+

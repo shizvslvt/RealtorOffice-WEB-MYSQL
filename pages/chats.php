@@ -40,6 +40,7 @@ if (isset($_GET['id'])) {
     if ($result_access->num_rows > 0) $access = true;
 
     if ($access) {
+        $buyer_id = null;
         $messages = array();
         $sql_messages = "SELECT
                         ro_messages.id, 
@@ -49,10 +50,10 @@ if (isset($_GET['id'])) {
                         ro_messages.date,
                         ro_chats.buyer_id,
                         ro_estates.seller_id 
-                        FROM ro_messages
-                        JOIN ro_chats ON ro_chats.id = ro_messages.chat_id
-                        JOIN ro_estates ON ro_chats.estate_id = ro_estates.id
-                        WHERE ro_chats.id = $chat_id";
+                    FROM ro_messages
+                    JOIN ro_chats ON ro_chats.id = ro_messages.chat_id
+                    JOIN ro_estates ON ro_chats.estate_id = ro_estates.id
+                    WHERE ro_chats.id = $chat_id";
 
         $result_messages = $db->query($sql_messages);
         if ($result_messages->num_rows > 0) {
@@ -60,17 +61,30 @@ if (isset($_GET['id'])) {
                 $statusclass = ($row['user_id'] == $uid) ? 'right' : 'left';
                 $row['statusclass'] = $statusclass;
                 $messages[] = $row;
+
+                $buyer_id = $row['buyer_id'];
             }
         }
 
+        $sql_check_realtor = "SELECT realtor_id FROM ro_chats WHERE id = $chat_id";
+        $result_check_realtor = $db->query($sql_check_realtor);
+        if ($result_check_realtor) {
+            $row = $result_check_realtor->fetch_assoc();
+            $realtor_id = $row['realtor_id'];
+
+            $realtor_added = !empty($realtor_id);
+            $theme->assign('realtor_added', $realtor_added);
+        }
+
+        $theme->assign('buyer_id', $buyer_id);
         $theme->assign('messages', $messages);
         $theme->assign('chat_id', $chat_id);
     }
+
     $theme->assign('uid', $uid);
     $theme->assign('access', $access);
     $theme->display('chat.tpl');
 }
-
 
 
 echo '</div>';

@@ -3,7 +3,7 @@
 class Estate
 {
 
-    public function WriteToDB(mixed $seller_id, mixed $title, mixed $cost, mixed $type, mixed $locality, mixed $city, mixed $area, mixed $bedrooms, mixed $floors, string $created)
+    public function WriteToDB( $seller_id, mixed $title, mixed $cost, mixed $type, mixed $locality, mixed $city, mixed $area, mixed $bedrooms, mixed $floors, string $created)
     {
         global $db, $notify;
         $sql = "INSERT INTO ro_estates (seller_id, title, cost, type, locality, city, area, bedrooms, floors, created)
@@ -37,11 +37,17 @@ class Estate
         $result = $db->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $statusClass = ($row['archived'] == 1) ? 'archived' : 'active';
-            $statusText = ($row['archived'] == 1) ? 'Archived' : 'Active';
+            $statusArchivedClass = ($row['archived'] == 1) ? 'not-active' : 'active';
+            $statusArchivedText = ($row['archived'] == 1) ? 'Archived' : 'Active';
+
+            $statusDealClass = ($row['sold'] == 1) ? 'active' : false;
+            $statusDealText = ($row['sold'] == 1) ? 'Deal' : 'Not deal';
+
             $theme->assign('estate', $row);
-            $theme->assign('statusClass', $statusClass);
-            $theme->assign('statusText', $statusText);
+            $theme->assign('statusArchivedClass', $statusArchivedClass);
+            $theme->assign('statusArchivedText', $statusArchivedText);
+            $theme->assign('statusDealClass', $statusDealClass);
+            $theme->assign('statusDealText', $statusDealText);
 
             if (isset($_COOKIE["uid"])) {
                 $uid = $_COOKIE["uid"];
@@ -175,6 +181,63 @@ class Estate
         return $list;
     }
 
+    public function setEstateArchived($id)
+    {
+        global $db, $notify;
+        $sql = "UPDATE ro_estates SET archived = 1 WHERE id = $id";
+        if ($db->query($sql) === TRUE) {
+            $notify->setMessage("Estate archived successfully");
+            return true;
+        }
+        return false;
+    }
+
+    public function setEstateDeal(mixed $estate_id)
+    {
+        global $db, $notify;
+        $sql = "UPDATE ro_estates SET sold = 1 WHERE id = $estate_id";
+        if ($db->query($sql) === TRUE) {
+            $notify->setMessage("Estate deal set successfully");
+            return true;
+        }
+        return false;
+    }
+
+    public function getCostByEstateId(mixed $estate_id)
+    {
+        global $db;
+        $sql = "SELECT cost FROM ro_estates WHERE id = $estate_id";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['cost'];
+    }
+
+    public function getArchivedEstate( $id)
+    {
+        global $db;
+        $sql = "SELECT archived FROM ro_estates WHERE id = $id";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['archived'];
+    }
+
+    public function getDealEstate( $id)
+    {
+        global $db;
+        $sql = "SELECT sold FROM ro_estates WHERE id = $id";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['sold'];
+    }
+
+    public function getUserIdByEstateId(mixed $estate_id)
+    {
+        global $db;
+        $sql = "SELECT seller_id FROM ro_estates WHERE id = $estate_id";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['seller_id'];
+    }
 
 
 }

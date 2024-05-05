@@ -1,0 +1,11 @@
+.logs-item {
+    margin: 20px;
+    width: auto;
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+    box-sizing: border-box;
+}

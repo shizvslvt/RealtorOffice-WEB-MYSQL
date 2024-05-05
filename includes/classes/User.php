@@ -1,15 +1,11 @@
 <?php
 
-class User {
+class User
+{
 
-    public function editRealtor($id, $user_id, $percent, $exp) {
+    public function editRealtor($id, $user_id, $percent, $exp)
+    {
         global $db, $notify;
-
-//        // Защита от SQL-инъекций
-//        $id = $db->real_escape_string($id);
-//        $user_id = $db->real_escape_string($user_id);
-//        $percent = $db->real_escape_string($percent);
-//        $exp = $db->real_escape_string($exp);
 
         $sql = "UPDATE ro_realtors SET user_id = '$user_id', percent = '$percent', experience = '$exp' WHERE id = '$id'";
         if ($db->query($sql)) {
@@ -21,7 +17,7 @@ class User {
 
     public function selectRealtor()
     {
-        global $theme, $db;
+        global $db;
         $query = "SELECT * FROM ro_realtors";
         $result = $db->query($query);
         $realtors = array();
@@ -31,8 +27,42 @@ class User {
                 $realtors[] = $row;
             }
         }
-
-        $theme->assign('realtors', $realtors);
+        return $realtors;
     }
 
+
+
+    public function setBalance( $uid, $param)
+    {
+        global $db;
+        $sql = "UPDATE ro_users SET balance = '$param' WHERE id = '$uid'";
+        return $db->query($sql);
+    }
+
+    public function getRealtorPercentByRealtorId(mixed $realtor_id)
+    {
+        global $db;
+        $sql = "SELECT percent FROM ro_realtors WHERE id = '$realtor_id'";
+        $result = $db->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['percent'];
+    }
+
+    public function getBalance($id)
+    {
+        global $db;
+        $sql = "SELECT balance FROM ro_users WHERE id = '$id'";
+        $result = $db->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['balance'];
+    }
+
+    public function getIdByRealtorId(mixed $realtor_id)
+    {
+        global $db;
+        $sql = "SELECT user_id FROM ro_realtors WHERE id = '$realtor_id'";
+        $result = $db->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['user_id'];
+    }
 }

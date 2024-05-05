@@ -72,7 +72,7 @@
     margin-bottom: 12px;
 }
 
-.status {
+.estate-status {
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 12px;
@@ -81,8 +81,9 @@
     justify-content: flex-end;
 }
 
-.status.active { color: #2ba972; background-color: rgba(43, 169, 114, 0.2);}
-.status.archived { color: #59719d; background-color: rgba(89, 113, 157, 0.2);}
+.estate-status.active { color: #2ba972; background-color: rgba(43, 169, 114, 0.2);}
+.estate-status.not-active { color: #59719d; background-color: rgba(89, 113, 157, 0.2);}
+
 
 
 .estate-edit {

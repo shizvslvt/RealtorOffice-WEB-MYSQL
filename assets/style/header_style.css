@@ -36,3 +36,7 @@
 .header-item.green:hover{
     color: var(--green);
 }
+.header-item-small{
+    font-size: 9px;
+    color: var(--grey);
+}

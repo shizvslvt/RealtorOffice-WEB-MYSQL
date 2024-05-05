@@ -9,7 +9,16 @@
     <div class="chat-main">
         <div class="chat-header">
             <h2>Messages for Chat ID: {$chat_id}</h2>
-            <a href="#" class="buy-link">Buy</a>
+            {if $realtor_added}
+                {if $buyer_id == $uid}
+                    <a href="?p=buy-estate&chat_id={$chat_id}" class="chat-link">Buy</a>
+                {/if}
+            {else}
+                <a href="?p=add-realtor-to-chat&chat_id={$chat_id}" class="chat-link">Add Realtor</a>
+            {/if}
+
+
+
         </div>
         <div class="messages">
             {if !empty($messages)}
