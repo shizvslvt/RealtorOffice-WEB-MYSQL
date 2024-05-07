@@ -2,18 +2,23 @@
 
 class Logs
 {
-    public function addLogs($text, $link, $type, $id)
+    public function addLogs($text, $link, $type, $id,$estate_id)
     {
         global $db, $notify;
-        $sql = "INSERT INTO ro_logs (text, link, type, date, user_id) VALUES ('$text', '$link', '$type', NOW(), '$id')";
+        if($id == null){
+            $sql = "INSERT INTO ro_logs (text, link, type, date, estate_id) VALUES ('$text', '$link', '$type', NOW(), '$estate_id')";
+        }
+        if ($estate_id == null) {
+            $sql = "INSERT INTO ro_logs (text, link, type, date, user_id) VALUES ('$text', '$link', '$type', NOW(), '$id')";
+        } else
+        $sql = "INSERT INTO ro_logs (text, link, type, date, user_id, estate_id) VALUES ('$text', '$link', '$type', NOW(), '$id', '$estate_id')";
 
-        $result = $db->query($sql);
-
-        if ($result) {
+        if ($db->query($sql)) {
             $notify->setMessage("Log added successfully");
         } else {
             $notify->setMessage("Error adding log: " . $db->error);
         }
+
     }
 
     public function selectLogs()

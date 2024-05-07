@@ -65,4 +65,13 @@ class User
         $row = mysqli_fetch_assoc($result);
         return $row['user_id'];
     }
+
+    public function countTotalUsers()
+    {
+        global $db;
+        $sql = "SELECT COUNT(*) FROM ro_users";
+        $result = $db->query($sql);
+        $row = mysqli_fetch_assoc($result);
+        return $row['COUNT(*)'];
+    }
 }

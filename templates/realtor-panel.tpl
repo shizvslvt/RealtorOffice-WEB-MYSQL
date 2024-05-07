@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../assets/style/realtors_style.css">
 
-
-<div class="realtor-item">
+<div class="control-panel-items">
+<div class="control-panel-item">
     <h1>Realtors</h1>
     <table>
         <thead>
@@ -25,6 +25,6 @@
         {/foreach}
         </tbody>
     </table>
-
+</div>
 </div>
 

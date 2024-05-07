@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../assets/style/message_style.css">
 <script>
-    window.onload = function() {
+    window.onload = function () {
         var messagesDiv = document.querySelector('.messages');
         messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
@@ -9,17 +9,15 @@
     <div class="chat-main">
         <div class="chat-header">
             <h2>Messages for Chat ID: {$chat_id}</h2>
-            {if $realtor_added}
-                {if $buyer_id == $uid}
+            {if !$realtor_added}
+                <a href="?p=add-realtor-to-chat&chat_id={$chat_id}" class="chat-link">Add Realtor</a>
+            {else}
+                {if $status_deal == 0}
                     <a href="?p=buy-estate&chat_id={$chat_id}" class="chat-link">Buy</a>
                 {/if}
-            {else}
-                <a href="?p=add-realtor-to-chat&chat_id={$chat_id}" class="chat-link">Add Realtor</a>
             {/if}
-
-
-
         </div>
+
         <div class="messages">
             {if !empty($messages)}
                 {foreach $messages as $message}

@@ -73,5 +73,25 @@ a {
     margin-top: 10px;
 }
 
+th, td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.11);
+}
+td {
+    color: var(--grey);
+}
+
+td a{
+    color: var(--grey);
+    transition: 0.3s ease-in-out;
+}
+td a:hover {
+    color: var(--white);
+}
 
 

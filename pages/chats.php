@@ -1,5 +1,5 @@
 <?php
-global $db, $theme, $notify;
+global $db, $theme, $notify, $estate, $chat;
 
 
 $uid = $_COOKIE["uid"];
@@ -74,8 +74,10 @@ if (isset($_GET['id'])) {
 
             $realtor_added = !empty($realtor_id);
             $theme->assign('realtor_added', $realtor_added);
-        }
 
+            $status_deal = $estate->checkDealByEstateId($chat->getEstateIdByChatId($chat_id));
+            $theme->assign('status_deal', $status_deal);
+        }
         $theme->assign('buyer_id', $buyer_id);
         $theme->assign('messages', $messages);
         $theme->assign('chat_id', $chat_id);

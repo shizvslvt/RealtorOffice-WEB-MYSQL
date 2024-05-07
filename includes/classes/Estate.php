@@ -239,5 +239,41 @@ class Estate
         return $row['seller_id'];
     }
 
+    public function countTotalEstates()
+    {
+        global $db;
+        $sql = "SELECT COUNT(*) FROM ro_estates";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['COUNT(*)'];
+    }
+
+    public function countTotalSoldEstates()
+    {
+        global $db;
+        $sql = "SELECT COUNT(*) FROM ro_estates WHERE sold = 1";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['COUNT(*)'];
+    }
+
+    public function getSoldEstatesStatisticsByMonth(mixed $date)
+    {
+        global $db;
+        $sql = "SELECT COUNT(*) FROM ro_logs WHERE type = 'Sale' AND date LIKE '$date%'";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['COUNT(*)'];
+    }
+
+    public function checkDealByEstateId(mixed $getEstateIdByChatId)
+    {
+        global $db;
+        $sql = "SELECT sold FROM ro_estates WHERE id = $getEstateIdByChatId";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['sold'];
+    }
+
 
 }

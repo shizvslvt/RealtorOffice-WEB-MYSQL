@@ -1,0 +1,43 @@
+.control-panel {
+    margin: 10px;
+    height: 90%;
+    overflow-y: auto;
+    box-shadow: var(--filter-shadow);
+    border-radius: 8px;
+    background-color: rgba(68, 73, 80, 0.29);
+}
+
+.control-panel::-webkit-scrollbar {
+    width: 10px;
+}
+
+.control-panel::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: var(--blk);
+}
+
+.control-panel::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b50;
+    border-radius: 6px;
+}
+
+.control-panel-item {
+    margin: 20px;
+    padding: 10px;
+    color: var(--grey);
+    background-color: var(--blk);
+    border-radius: 8px;
+    cursor: inherit;
+    transition: all 0.4s ease;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.statistic-panel-item a:hover .control-panel-item {
+    color: var(--white);
+}
+
+.statistic {
+    max-width: 30%
+}

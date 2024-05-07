@@ -14,7 +14,7 @@ class Chat
             $notify->setMessage("Chat already exists for this estate and buyer");
             header('Location: ?p=chats');
         } else {
-            $insert_sql = "INSERT INTO ro_chats (estate_id, buyer_id, rieltor_id) VALUES ('$estate_id', '$buyer_id', NULL)";
+            $insert_sql = "INSERT INTO ro_chats (estate_id, buyer_id, realtor_id) VALUES ('$estate_id', '$buyer_id', NULL)";
             if ($db->query($insert_sql) === TRUE) {
                 $notify->setMessage("Chat create successful");
                 $chat_id = $db->insert_id;
