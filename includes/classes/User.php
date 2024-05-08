@@ -74,4 +74,13 @@ class User
         $row = mysqli_fetch_assoc($result);
         return $row['COUNT(*)'];
     }
+
+    public function getListUsersId()
+    {
+        global $db;
+        $sql = "SELECT id FROM ro_users";
+        return $db->query($sql);
+    }
+
+
 }

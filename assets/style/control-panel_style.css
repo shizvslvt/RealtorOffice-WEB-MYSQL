@@ -37,7 +37,7 @@
 .statistic-panel-item a:hover .control-panel-item {
     color: var(--white);
 }
-
-.statistic {
-    max-width: 30%
+.statistic-panel-item {
+    display: flex;
+    justify-content: center;
 }

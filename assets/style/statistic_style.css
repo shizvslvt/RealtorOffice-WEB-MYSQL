@@ -1,0 +1,55 @@
+select {
+    width: 250px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #424242;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    scrollbar-width: thin;
+    scrollbar-color: #9b9b9b50 transparent;
+}
+select::-webkit-scrollbar {
+    width: 10px;
+}
+select::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #424242;
+}
+select::-webkit-scrollbar-thumb {
+    background-color: #9b9b9b50;
+    border-radius: 6px;
+}
+
+/* Стиль для поля ввода типа month */
+input[type="month"], input[type="year"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #424242; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Стиль для кнопки */
+button[type="button"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green); /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Стиль для кнопки при наведении */
+button[type="button"]:hover {
+    background-color: rgba(128, 255, 180, 0.5); /* Измененный цвет фона при наведении */
+}

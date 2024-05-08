@@ -3,9 +3,11 @@ global $chat, $user, $notify, $log, $estate, $db;
 $chat_id = $_GET['chat_id'];
 $uid = $_COOKIE['uid'];
 
+
 try {
     $db->begin_transaction();
     $estate_id = $chat->getEstateIdByChatId($chat_id);
+    if($estate->getDealEstate($estate_id)==1) throw new Exception('Deal estate already exists');
     // Check buyer's balance
     $buyer_balance = $user->getBalance($uid);
 

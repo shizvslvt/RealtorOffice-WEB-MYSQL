@@ -3,7 +3,7 @@
 class Estate
 {
 
-    public function WriteToDB( $seller_id, mixed $title, mixed $cost, mixed $type, mixed $locality, mixed $city, mixed $area, mixed $bedrooms, mixed $floors, string $created)
+    public function WriteToDB($seller_id, mixed $title, mixed $cost, mixed $type, mixed $locality, mixed $city, mixed $area, mixed $bedrooms, mixed $floors, string $created)
     {
         global $db, $notify;
         $sql = "INSERT INTO ro_estates (seller_id, title, cost, type, locality, city, area, bedrooms, floors, created)
@@ -15,7 +15,8 @@ class Estate
         }
     }
 
-    public function getData($table) {
+    public function getData($table)
+    {
         global $db;
         $data = [];
         $result = $db->query("SELECT * FROM $table");
@@ -25,7 +26,8 @@ class Estate
         return $data;
     }
 
-    function SelectedByID($id) {
+    function SelectedByID($id)
+    {
         global $db, $theme;
 
         $sql = "SELECT estate.*, types.name AS type_name, localities.name AS locality_name, cities.name AS city_name
@@ -66,7 +68,8 @@ class Estate
     }
 
 
-    public static function incrementEstateViews($id) {
+    public static function incrementEstateViews($id)
+    {
         global $db, $notify;
         $sql = "UPDATE ro_estates SET views = views + 1 WHERE id = $id";
         $result = $db->query($sql);
@@ -90,17 +93,16 @@ class Estate
         global $db, $notify;
 
         $sql = "SELECT 1 FROM ro_history_view WHERE user_id = $uid AND estate_id = $id LIMIT 1";
-        $result= $db->query($sql);
+        $result = $db->query($sql);
         if ($result->num_rows > 0) {
             $notify->setMessage("Already exists in the history of views");
         } else {
             $created = date('Y-m-d H:i:s');
             $sql_insert = "INSERT INTO ro_history_view (user_id, estate_id, created) VALUES ('$uid', '$id', '$created')";
-            if($db->query($sql_insert)) {
+            if ($db->query($sql_insert)) {
                 self::incrementEstateViews($id);
                 $notify->SetMessage("Successful added to history of views");
-            }
-            else $notify->SetMessage("Error while added to history of views");
+            } else $notify->SetMessage("Error while added to history of views");
         }
     }
 
@@ -115,7 +117,8 @@ class Estate
         }
     }
 
-    public function getAllActiveEstates() {
+    public function getAllActiveEstates()
+    {
         global $db, $estate;
         $sql = "SELECT id FROM ro_estates WHERE archived = 0 ORDER BY created DESC";
         $result = $db->query($sql);
@@ -127,7 +130,8 @@ class Estate
         echo '</div>';
     }
 
-    public function getSellersEstates(mixed $uid) {
+    public function getSellersEstates($uid)
+    {
         global $db;
         echo '<div class="estate-grid">';
         $sql = "SELECT id FROM ro_estates WHERE seller_id = $uid ORDER BY created DESC";
@@ -136,8 +140,19 @@ class Estate
             self::SelectedByID($row['id']);
         }
     }
+    public function getEstateByCityId($id)
+    {
+        global $db;
+        echo '<div class="estate-grid">';
+        $sql = "SELECT * FROM ro_estates WHERE city = $id ORDER BY created DESC";
+        $result = $db->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            self::SelectedByID($row['id']);
+        }
+    }
 
-    public function editEstate($id, $title, $cost, $type, $locality, $city, $area, $bedrooms, $floors, $archived) {
+    public function editEstate($id, $title, $cost, $type, $locality, $city, $area, $bedrooms, $floors, $archived)
+    {
         global $db, $notify;
 
 
@@ -150,7 +165,8 @@ class Estate
     }
 
 
-    public static function getAllActiviesEstates() {
+    public static function getAllActiviesEstates()
+    {
         global $db;
 
         $sql = "SELECT * FROM ro_estates WHERE archived = 0 ORDER BY created DESC";
@@ -212,7 +228,7 @@ class Estate
         return $row['cost'];
     }
 
-    public function getArchivedEstate( $id)
+    public function getArchivedEstate($id)
     {
         global $db;
         $sql = "SELECT archived FROM ro_estates WHERE id = $id";
@@ -221,7 +237,7 @@ class Estate
         return $row['archived'];
     }
 
-    public function getDealEstate( $id)
+    public function getDealEstate($id)
     {
         global $db;
         $sql = "SELECT sold FROM ro_estates WHERE id = $id";
@@ -257,15 +273,6 @@ class Estate
         return $row['COUNT(*)'];
     }
 
-    public function getSoldEstatesStatisticsByMonth(mixed $date)
-    {
-        global $db;
-        $sql = "SELECT COUNT(*) FROM ro_logs WHERE type = 'Sale' AND date LIKE '$date%'";
-        $result = $db->query($sql);
-        $row = $result->fetch_assoc();
-        return $row['COUNT(*)'];
-    }
-
     public function checkDealByEstateId(mixed $getEstateIdByChatId)
     {
         global $db;
@@ -273,6 +280,99 @@ class Estate
         $result = $db->query($sql);
         $row = $result->fetch_assoc();
         return $row['sold'];
+    }
+
+    public function getListCityIdAndName()
+    {
+        global $db;
+        $sql = "SELECT id, name FROM list_cities";
+        $result = $db->query($sql);
+        $list = [];
+        while ($row = $result->fetch_assoc()) {
+            $list[] = $row;
+        }
+        return $list;
+    }
+
+    public function TotalEstatesByCityId(mixed $current_city_id)
+    {
+        global $db;
+        $sql = "SELECT COUNT(*) FROM ro_estates WHERE city = $current_city_id";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['COUNT(*)'];
+    }
+
+
+    public function getCreatedEstatesByYear($year, $months) {
+        global $db;
+        $monthlyData = [];
+
+        $sql = "SELECT MONTH(created) AS month, COUNT(*) AS count_sold 
+            FROM ro_estates 
+            WHERE YEAR(created) = $year
+            GROUP BY MONTH(created)";
+        $result = $db->query($sql);
+        foreach ($months as $month) {
+            $monthlyData[$month] = 0;
+        }
+        while ($row = $result->fetch_assoc()) {
+            $monthIndex = $row['month'] - 1;
+            $monthLabel = $months[$monthIndex];
+            $monthlyData[$monthLabel] = $row['count_sold'];
+        }
+
+        $labels = array_keys($monthlyData);
+        $datasetValues = array_values($monthlyData);
+        $datasetLabel = 'Totals added estates in ' . $year;
+        return array($labels, $datasetValues, $datasetLabel);
+    }
+
+    public function getSoldEstatesByYear($year, $months) {
+        global $db;
+        $monthlyData = [];
+
+        $sql = "SELECT MONTH(date) AS month, COUNT(*) AS count_sold 
+            FROM ro_logs 
+            WHERE type = 'Sale' AND YEAR(date) = $year 
+            GROUP BY MONTH(date)";
+        $result = $db->query($sql);
+        foreach ($months as $month) {
+            $monthlyData[$month] = 0;
+        }
+        while ($row = $result->fetch_assoc()) {
+            $monthIndex = $row['month'] - 1;
+            $monthLabel = $months[$monthIndex];
+            $monthlyData[$monthLabel] = $row['count_sold'];
+        }
+        $labels = array_keys($monthlyData);
+        $datasetValues = array_values($monthlyData);
+        $datasetLabel = 'Totals sold estates in ' . $year;
+
+        return array($labels, $datasetValues, $datasetLabel);
+    }
+
+    public function CountSoldEstatesByCityAndYear(mixed $current_year)
+    {
+        global $db;
+        $sql = "SELECT
+        list_cities.name AS city,
+        COUNT(ro_estates.id) AS sold_count
+        FROM
+        ro_logs, ro_estates, list_cities
+        WHERE ro_logs.estate_id = ro_estates.id AND
+        list_cities.id = ro_estates.city AND 
+        ro_logs.date LIKE '$current_year%'
+        GROUP BY
+        list_cities.name";
+
+        $result = $db->query($sql);
+        $circleData = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $circleData[] = array('label' => $row['city'], 'value' => (int)$row['sold_count']);
+        }
+        return $circleData;
     }
 
 

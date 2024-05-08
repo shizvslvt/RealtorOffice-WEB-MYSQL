@@ -2,15 +2,19 @@
 
 
 <div class="statistic-panel-item">
-    <a href="?p=control-panel&c=statistic&a=sold-estates&d={$current_date}">
+    <a href="?p=control-panel&c=statistic&a=estates-by-city&id={$current_city_id}">
         <div class="control-panel-item statistic">
-            Total Sold Estates: {$total_sold_estates}
+            Estates by city
         </div>
     </a>
-    <div class="control-panel-item statistic">
-        Total Users: {$total_users}
-    </div>
-    <div class="control-panel-item statistic">
-        Total Estates: {$total_estates}
-    </div>
+    <a href="?p=control-panel&c=statistic&a=users&id={$current_user_id}">
+        <div class="control-panel-item statistic">
+            Total Users: {$total_users}
+        </div>
+    </a>
+    <a href="?p=control-panel&c=statistic&a=total-estates">
+        <div class="control-panel-item statistic">
+            Total Estates: {$total_estates}
+        </div>
+    </a>
 </div>

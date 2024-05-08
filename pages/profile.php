@@ -1,10 +1,9 @@
 <?php
 global $theme, $user, $db, $estate;
 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-if (isset($_COOKIE['uid'])) {
-
-    $uid = $_COOKIE['uid'];
-    $estate->getSellersEstates($uid);
+    $estate->getSellersEstates($id);
 }
 

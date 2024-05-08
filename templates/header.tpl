@@ -21,7 +21,7 @@
         {/if}
         {if $uid}
             <a href="?p=logout"><div class="header-item red">Logout</div></a>
-            <a href="?p=profile"><div class="header-item">Profile <div class="header-item-small">{$uid} | {$balance} $</div></div></a>
+            <a href="?p=profile&id={$uid}"><div class="header-item">Profile <div class="header-item-small">{$uid} | {$balance} $</div></div></a>
         {/if}
     </div>
 </div>
