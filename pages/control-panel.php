@@ -76,6 +76,7 @@ if (isset($_GET['c'])) {
                         $theme->display('estates-dates.tpl');
 
                         $circleData = $estate->CountSoldEstatesByCityAndYear($current_year);
+                        $theme->assign('current_year', $current_year);
                         $theme->assign('circleData', $circleData);
                         $theme->display('circle_diagram.tpl');
 
