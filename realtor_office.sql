@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 01:03 AM
+-- Generation Time: May 18, 2024 at 02:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `realtor_office`
 --
+CREATE DATABASE IF NOT EXISTS `realtor_office` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `realtor_office`;
 
 -- --------------------------------------------------------
 
