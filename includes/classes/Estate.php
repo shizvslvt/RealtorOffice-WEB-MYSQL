@@ -3,7 +3,7 @@
 class Estate
 {
 
-    public function WriteToDB($seller_id, mixed $title, mixed $cost, mixed $type, mixed $locality, mixed $city, mixed $area, mixed $bedrooms, mixed $floors, string $created)
+    public function WriteToDB($seller_id, $title, $cost, $type, $locality, $city, $area, $bedrooms, $floors, $created)
     {
         global $db, $notify;
         $sql = "INSERT INTO ro_estates (seller_id, title, cost, type, locality, city, area, bedrooms, floors, created)
@@ -164,39 +164,6 @@ class Estate
         }
     }
 
-
-    public static function getAllActiviesEstates()
-    {
-        global $db;
-
-        $sql = "SELECT * FROM ro_estates WHERE archived = 0 ORDER BY created DESC";
-        $result = $db->query($sql);
-
-        $list = array();
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $entry = array(
-                    'id' => $row["id"],
-                    'seller_id' => $row["seller_id"],
-                    'title' => $row["title"],
-                    'cost' => $row["cost"],
-                    'type' => $row["type"],
-                    'locality' => $row["locality"],
-                    'city' => $row["city"],
-                    'area' => $row["area"],
-                    'bedrooms' => $row["bedrooms"],
-                    'floors' => $row["floors"],
-                    'created' => $row["created"],
-                    'viewed' => $row["viewed"],
-                    'deal' => $row["deal"],
-                    'archived' => $row["archived"]
-                );
-                $list[] = $entry;
-            }
-        }
-        return $list;
-    }
-
     public function setEstateArchived($id)
     {
         global $db, $notify;
@@ -208,7 +175,7 @@ class Estate
         return false;
     }
 
-    public function setEstateDeal(mixed $estate_id)
+    public function setEstateDeal($estate_id)
     {
         global $db, $notify;
         $sql = "UPDATE ro_estates SET sold = 1 WHERE id = $estate_id";
@@ -219,7 +186,7 @@ class Estate
         return false;
     }
 
-    public function getCostByEstateId(mixed $estate_id)
+    public function getCostByEstateId($estate_id)
     {
         global $db;
         $sql = "SELECT cost FROM ro_estates WHERE id = $estate_id";
@@ -246,7 +213,7 @@ class Estate
         return $row['sold'];
     }
 
-    public function getUserIdByEstateId(mixed $estate_id)
+    public function getUserIdByEstateId($estate_id)
     {
         global $db;
         $sql = "SELECT seller_id FROM ro_estates WHERE id = $estate_id";
@@ -273,7 +240,7 @@ class Estate
         return $row['COUNT(*)'];
     }
 
-    public function checkDealByEstateId(mixed $getEstateIdByChatId)
+    public function checkDealByEstateId($getEstateIdByChatId)
     {
         global $db;
         $sql = "SELECT sold FROM ro_estates WHERE id = $getEstateIdByChatId";
@@ -294,7 +261,7 @@ class Estate
         return $list;
     }
 
-    public function TotalEstatesByCityId(mixed $current_city_id)
+    public function TotalEstatesByCityId($current_city_id)
     {
         global $db;
         $sql = "SELECT COUNT(*) FROM ro_estates WHERE city = $current_city_id";
@@ -352,7 +319,7 @@ class Estate
         return array($labels, $datasetValues, $datasetLabel);
     }
 
-    public function CountSoldEstatesByCityAndYear(mixed $current_year)
+    public function CountSoldEstatesByCityAndYear($current_year)
     {
         global $db;
         $sql = "SELECT
