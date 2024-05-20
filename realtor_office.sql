@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 02:02 PM
+-- Generation Time: May 20, 2024 at 09:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -138,18 +138,18 @@ INSERT INTO `ro_chats` (`id`, `estate_id`, `buyer_id`, `realtor_id`) VALUES
 CREATE TABLE `ro_estates` (
   `id` int(11) NOT NULL,
   `seller_id` int(11) NOT NULL,
-  `title` mediumtext NOT NULL,
+  `title` text NOT NULL,
   `cost` double NOT NULL,
-  `type` int(11) NOT NULL,
-  `locality` int(11) NOT NULL,
-  `city` int(11) NOT NULL,
+  `type` int(1) NOT NULL,
+  `locality` int(1) NOT NULL,
+  `city` int(1) NOT NULL,
   `area` double NOT NULL,
-  `bedrooms` int(11) NOT NULL,
-  `floors` int(11) NOT NULL,
+  `bedrooms` int(5) NOT NULL,
+  `floors` int(5) NOT NULL,
   `created` datetime NOT NULL,
   `views` int(11) DEFAULT 0,
   `archived` int(1) DEFAULT 0,
-  `sold` int(11) DEFAULT 0
+  `sold` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -183,7 +183,7 @@ CREATE TABLE `ro_history_view` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `estate_id` int(11) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -191,9 +191,9 @@ CREATE TABLE `ro_history_view` (
 --
 
 INSERT INTO `ro_history_view` (`id`, `user_id`, `estate_id`, `created`) VALUES
-(25, 1, 11, '2024-05-04 08:09:06'),
-(26, 2, 11, '2024-05-04 08:16:58'),
-(27, 1, 5, '2024-05-05 10:31:34');
+(25, 1, 11, '2024-05-04 11:09:06'),
+(26, 2, 11, '2024-05-04 11:16:58'),
+(27, 1, 5, '2024-05-05 13:31:34');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ CREATE TABLE `ro_users` (
   `birthday` date DEFAULT NULL,
   `PID` int(9) DEFAULT NULL,
   `balance` double DEFAULT 0,
-  `created` timestamp NULL DEFAULT NULL
+  `created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -312,14 +312,14 @@ CREATE TABLE `ro_users` (
 --
 
 INSERT INTO `ro_users` (`id`, `name`, `mail`, `password`, `birthday`, `PID`, `balance`, `created`) VALUES
-(1, 'Юшко Константин Вячеславович', 'test', 'test', '2004-02-06', 133714488, 25000, '2022-12-21 11:54:04'),
-(2, 'Вика', 'vika2003@gmail.com', '9afaif43f32', '2003-10-30', 140772131, 537749, '2023-10-27 11:13:09'),
-(3, 'Коля', 'apostol@gmail.com', '1930fi93ifp2if3', '2004-07-10', 142103784, 8000, '2023-10-29 15:09:00'),
-(4, 'Никита Кузнецов Викторовна', 'nikitka2012@gmail.com', 'af9i45ig3g3a', '2012-12-31', 231356351, 120000, '2023-10-26 05:10:06'),
-(5, 'Даша', 'daria@gmail.com', '13u8t123ioas', '2004-04-16', 141941665, 97500, '2023-10-31 07:09:08'),
-(6, 'Даня Мозжухин Олеговна', 'danyalox123@gmail.com', '1432gds4qw1', '2004-04-16', 141941664, 11250, '2023-10-31 15:21:49'),
-(7, 'Катя', 'katya@gmail.com', 'a93iuoga3', '2004-04-16', 141941663, 80000, '2023-12-10 07:11:08'),
-(8, 'admin', 'admin', 'admin', '2004-02-06', 133714488, 0, '2024-04-30 15:17:59');
+(1, 'Юшко Константин Вячеславович', 'test', 'test', '2004-02-06', 133714488, 25000, '2022-12-21 13:54:04'),
+(2, 'Вика', 'vika2003@gmail.com', '9afaif43f32', '2003-10-30', 140772131, 537749, '2023-10-27 14:13:09'),
+(3, 'Коля', 'apostol@gmail.com', '1930fi93ifp2if3', '2004-07-10', 142103784, 8000, '2023-10-29 17:09:00'),
+(4, 'Никита Кузнецов Викторовна', 'nikitka2012@gmail.com', 'af9i45ig3g3a', '2012-12-31', 231356351, 120000, '2023-10-26 08:10:06'),
+(5, 'Даша', 'daria@gmail.com', '13u8t123ioas', '2004-04-16', 141941665, 97500, '2023-10-31 09:09:08'),
+(6, 'Даня Мозжухин Олеговна', 'danyalox123@gmail.com', '1432gds4qw1', '2004-04-16', 141941664, 11250, '2023-10-31 17:21:49'),
+(7, 'Катя', 'katya@gmail.com', 'a93iuoga3', '2004-04-16', 141941663, 80000, '2023-12-10 09:11:08'),
+(8, 'admin', 'admin', 'admin', '2004-02-06', 133714488, 0, '2024-04-30 18:17:59');
 
 --
 -- Indexes for dumped tables
@@ -504,6 +504,12 @@ ALTER TABLE `ro_logs`
 ALTER TABLE `ro_messages`
   ADD CONSTRAINT `FK_ro_chat_ro_deals` FOREIGN KEY (`chat_id`) REFERENCES `ro_chats` (`id`),
   ADD CONSTRAINT `FK_ro_chat_ro_users` FOREIGN KEY (`user_id`) REFERENCES `ro_users` (`id`);
+
+--
+-- Constraints for table `ro_realtors`
+--
+ALTER TABLE `ro_realtors`
+  ADD CONSTRAINT `FK_ro_realtors_ro_users` FOREIGN KEY (`user_id`) REFERENCES `ro_users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
