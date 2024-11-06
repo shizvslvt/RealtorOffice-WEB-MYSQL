@@ -3,6 +3,7 @@ global $db, $notify;
 
 
 $chat_id = $_GET['chat_id'];
+//TODO вместо добавления риелтора, реализовать риелторам на странице выбор с какими недвижимостями они хотят работать, а те до тех пор держать в неактивном состоянии
 $realtor_id = 1;
 
 $sql_update_chat = "UPDATE ro_chats SET realtor_id = $realtor_id WHERE id = $chat_id";

@@ -4,7 +4,7 @@ global $db;
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "realtor_office";
+$dbname = "realtor_office_";
 
 $db = mysqli_connect($servername, $username, $password, $dbname);
 if(!$db) die("Connection Filed". mysqli_connect_error());

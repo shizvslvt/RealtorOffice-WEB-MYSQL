@@ -49,4 +49,4 @@ $log = new Logs();
 // Other
 //
 
-$GLOBALS["admin_id"] = 8;
+$GLOBALS["admin_id"] = 1;

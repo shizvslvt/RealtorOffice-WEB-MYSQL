@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/realtor_office</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="realtor_office_@localhost" uuid="f3d555c3-626d-4047-ad5c-9f11ca7f3bff">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/realtor_office_</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
